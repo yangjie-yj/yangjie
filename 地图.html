@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script type="text/javascript" src="china.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="row" style="background-color: silver; height: 50px">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期 <input type="text" name="time"
+            id="time" placeholder="yyyy-MM-dd hh:mm:ss"> <input
+            type="button" value="查询" onclick="tu()">
+    </div>
+    <p>fgghfghh</p>
+    <div id="main" style="width:600px;height: 500px"></div>
+    <script>
+         // 函数China_map 用来实现地图
+        
+        function China_map(id,mydata,data_obj) {      //id 初始化echarts的div  mydata数据（后端返回的数据）
+            //初始化echarts实例
+            var myChart = echarts.init(document.getElementById(id));
+ 
+            // 地图的echarts  使用制定的配置项和数据显示图表
+            myChart.setOption({
+                backgroundColor: '#ccc',
+                title: {
+                    text: '全国地图大数据',
+                    subtext: '',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+ 
+                //右侧小导航图标 及相关文字
+                visualMap: {
+                    show: true,
+                    x: 'right',
+                    y: 'center',
+                    splitList: data_obj,
+                    color: ['#5B0F0F', '#A11616', '#F43939', '#FA7C7C', '#F7B5B5', '#F7D6D6', '#FFFFFF']
+                },
+ 
+                //配置属性
+                series: [{
+                    name: '数据',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,      // 禁止拖动地图
+                    label: {
+                        normal: {
+                            show: true
+                        },
+                        emphasis: {
+                            show: false
+                        }
+                    },
+                    data: mydata            // 传入的数据
+                }]
+            });
+        }
+ 
+        // 写入数据
+        function Data() {
+            return 0;
+        }
+        var mydata = [{name: '北京',value: Data()}, { name: '天津',value: Data()},
+            {name: '上海', value: Data() }, { name: '重庆',value: Data() },
+            {name: '河北',value: Data()}, { name: '河南', value: Data() },
+            {name: '云南', value: Data()}, { name: '辽宁',value: Data()},
+            {name: '黑龙江', value: Data()}, {name: '湖南',value: Data()},
+            {name: '安徽', value: Data()}, { name: '山东',value: Data()},
+            {name: '新疆', value: Data()}, {name: '江苏',value: Data()},
+            {name: '浙江',value: Data()}, {name: '江西',value: Data()},
+            {name: '湖北',value: Data()}, {name: '广西',value: Data()},
+            {name: '甘肃',value: Data()}, {name: '山西',value: Data()},
+            {name: '内蒙古',value: Data()}, {name: '陕西',value: Data()},
+            {name: '吉林',value: Data()}, {name: '福建',value: Data()},
+            {name: '贵州',value: Data()}, {name: '广东',value: Data()},
+            {name: '青海',value: Data()}, {name: '西藏',value: Data()},
+            {name: '四川',value: Data()}, {name: '宁夏',value: Data()},
+            {name: '海南',value: Data()}, {name: '台湾',value: Data()},
+            {name: '香港',value: Data()}, {name: '澳门',value: Data()}
+        ];
+        var data_obj = [{start: 500,end: 600}, 
+                        {start: 400,end: 500},
+                        {start: 300,end: 400}, 
+                        {start: 200,end: 300},
+                        {start: 100,end: 200}, 
+                        {start: 1,end: 100},
+                        {start: 0,end: 0},
+                    ]
+        China_map('main',mydata,data_obj);   // 调用地图
+    </script>
+</body>
+ 
+</html>
